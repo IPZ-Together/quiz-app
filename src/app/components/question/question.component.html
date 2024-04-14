@@ -1,0 +1,21 @@
+<div *ngIf="!question && !errorMessage">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="question">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ question.question }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-radio-group [(ngModel)]="question.userAnswer">
+          <ng-container *ngFor="let answer of question.answers | keyvalue">
+            <mat-radio-button *ngIf="answer.value" [value]="answer.key">{{ answer.value }}</mat-radio-button>
+          </ng-container>
+        </mat-radio-group>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="submitAnswer()" mat-button>Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
